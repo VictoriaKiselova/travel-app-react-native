@@ -1,11 +1,16 @@
-import { Text, View } from "react-native";
-import Header from "../../../components/Header/Header";
+import { Button, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
   return (
     <View>
-      <Header />
       <Text>HomeScreen</Text>
+      <Button
+        title="Перейти к деталям"
+        onPress={() => navigation.navigate("details")}
+      />
     </View>
   );
 }
