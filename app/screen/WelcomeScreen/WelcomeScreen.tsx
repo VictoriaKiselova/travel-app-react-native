@@ -1,10 +1,8 @@
 import React from "react";
-import { View, Dimensions } from "react-native";
+import { View } from "react-native";
 import { useVideoPlayer, VideoView } from "expo-video";
 
 export default function WelcomeScreen() {
-  const windowHeight = Dimensions.get("window").height;
-  const windowWidth = Dimensions.get("window").width;
   const videoSource = require("../../../assets/videos/welcome.mp4");
 
   const player = useVideoPlayer(videoSource, player => {
@@ -13,9 +11,7 @@ export default function WelcomeScreen() {
   });
 
   return (
-    <View
-      className="absolute top-0 left-0"
-      style={{ height: windowHeight, width: windowWidth, zIndex: 10 }}>
+    <View className="z-0 h-full w-full">
       <VideoView
         style={{ flex: 1, width: "100%", height: "100%" }}
         player={player}
