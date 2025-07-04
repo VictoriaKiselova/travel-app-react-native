@@ -1,5 +1,7 @@
+import { LinearGradient } from "expo-linear-gradient";
 import { Button, View, Text } from "react-native";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
+import GradientLayout from "@/components/GradientLayout/GradientLayout";
 
 type RootStackParamList = {
   Home: undefined;
@@ -10,12 +12,14 @@ export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View>
-      <Text>HomeScreen</Text>
-      {/* <Button
+    <GradientLayout>
+      <View className="p-1 bg-gradient-to-br from-gradient-100 via-gradient-200 to-gradient-300">
+        <Text>HomeScreen</Text>
+        {/* <Button
         title="Перейти к деталям"
         onPress={() => navigation.navigate("details")}
       /> */}
-    </View>
+      </View>
+    </GradientLayout>
   );
 }

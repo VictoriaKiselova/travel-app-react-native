@@ -6,6 +6,7 @@ import TourDetails from "../../app/screen/TourDetails/TourDetails";
 import Favorites from "@/app/screen/Favorites/Favorites";
 import NavMenu from "../NavMenu/NavMenu";
 import Profile from "@/app/screen/Profile/Profile";
+import Header from "../Header/Header";
 
 type RootStackParamList = {
   home: undefined;
@@ -19,7 +20,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
+      <Header />
+      <Stack.Navigator
+        initialRouteName="home"
+        screenOptions={{ headerShown: false }}>
         <Stack.Screen name="home" component={HomeScreen} />
         <Stack.Screen name="favorites" component={Favorites} />
         {/* <Stack.Screen name="details" component={TourDetails} /> */}
