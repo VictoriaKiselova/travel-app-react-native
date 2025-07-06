@@ -13,8 +13,7 @@ export default function HomeScreen() {
 
   return (
     <GradientLayout>
-      <View className="p-1 bg-gradient-to-br from-gradient-100 via-gradient-200 to-gradient-300">
-        <Text>HomeScreen</Text>
+      <View className="p-3 bg-gradient-to-br from-gradient-100 via-gradient-200 to-gradient-300">
         {/* <Button
         title="Перейти к деталям"
         onPress={() => navigation.navigate("details")}

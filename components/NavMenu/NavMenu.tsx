@@ -17,7 +17,7 @@ export default function NavMenu() {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <View className="absolute bottom-0 left-0 flex flex-row bg-blue-900 w-full p-[1px] pb-3">
+    <View className="absolute bottom-0 left-0 flex flex-row bg-blue-900 w-full p-[1px] pb-0">
       <TouchableOpacity
         className="bg-blue-900 py-3 w-1/3 flex justify-center items-center gap-[6px]"
         onPress={() => navigation.navigate("home")}>
