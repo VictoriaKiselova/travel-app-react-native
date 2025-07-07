@@ -13,7 +13,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   return (
-    <View className="w-full px-2 pb-3 bg-blue-900 flex flex-row gap-1 justify-between items-center">
+    <View className="w-full px-1 pb-2 bg-blue-800 flex flex-row gap-1 justify-between">
       <TouchableOpacity onPress={() => navigation.navigate("home")}>
         <Image
           source={require("../../assets/images/logo.png")}
@@ -27,6 +27,7 @@ export default function Header() {
         style={{
           flex: 1,
           marginLeft: 10,
+          marginRight: 6,
           backgroundColor: "#262655",
         }}
         inputStyle={{
@@ -36,9 +37,6 @@ export default function Header() {
         }}
         icon={() => <MaterialIcons name="search" size={20} color="#E0E0E0" />}
         elevation={0}
-        theme={{
-          colors: { onSurfaceVariant: "#E0E0E0" },
-        }}
       />
     </View>
   );
