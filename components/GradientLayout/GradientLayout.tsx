@@ -16,7 +16,7 @@ export default function GradientLayout({
       colors={["#fee6ed", "#ebc7f9", "#a3c6f1"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={[{ flex: 1 }, style]}>
+      style={[{ flex: 1, paddingBottom: 90 }, style]}>
       {children}
     </LinearGradient>
   );

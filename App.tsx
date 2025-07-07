@@ -1,9 +1,10 @@
 import "nativewind";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar} from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
 import WelcomeScreen from "./app/screen/WelcomeScreen/WelcomeScreen";
 import Navigation from "./components/Navigation/Navigation";
 import { Provider as PaperProvider } from "react-native-paper";
+import ToursProvider from "@/components/Context/ToursContext";
 import "./app/global.css";
 
 export default function App() {
@@ -19,11 +20,13 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView className="flex-1 relative bg-blue-900">
-      <PaperProvider>
-        <StatusBar barStyle="light-content" />
-        <Navigation />
-      </PaperProvider>
+    <SafeAreaView className="flex-1 relative bg-blue-800">
+      <ToursProvider>
+        <PaperProvider>
+          <StatusBar barStyle="light-content" />
+          <Navigation />
+        </PaperProvider>
+      </ToursProvider>
     </SafeAreaView>
   );
 }
