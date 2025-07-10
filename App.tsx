@@ -11,7 +11,7 @@ export default function App() {
   const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowWelcome(false), 5000);
+    const timer = setTimeout(() => setShowWelcome(false), 4300);
     return () => clearTimeout(timer);
   }, []);
 
