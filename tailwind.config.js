@@ -13,6 +13,7 @@ module.exports = {
         background: "#C4B5FD",
         white: {
           100: "#FFFFFF",
+          200: "#f5edf7",
           DEFAULT: "#FFFFFF",
         },
         blue: {
@@ -22,6 +23,7 @@ module.exports = {
           400: "#3348d4",
           500: "#4053cf",
           600: "#0f2299",
+          700: "#588fe8",
           800: "#010142",
           900: "#000033",
 
@@ -29,11 +31,17 @@ module.exports = {
         },
         gray: {
           100: "#DCDCDC",
+          200: "#8c95a3",
         },
         gradient: {
           100: "#fee6ed",
           200: "#ebc7f9",
           300: "#a3c6f1",
+        },
+        black: {
+          300: "#636569",
+          400: "#37383b",
+          DEFAULT: "#000000",
         },
       },
     },

@@ -1,5 +1,5 @@
 import { Tour } from "@/types/tours";
-import { createContext, useContext, useState} from "react";
+import { createContext, useContext, useState } from "react";
 
 interface IToursContext {
   tours: Tour[] | null;
@@ -20,7 +20,7 @@ export function useToursContext() {
 
 const ToursProvider = ({ children }: { children: React.ReactNode }) => {
   const [tours, setTours] = useState<Tour[] | null>(null);
-  const [category, setCategory] = useState<string>("popular");
+  const [category, setCategory] = useState<string>("all");
 
   return (
     <ToursContext.Provider value={{ tours, setTours, category, setCategory }}>
