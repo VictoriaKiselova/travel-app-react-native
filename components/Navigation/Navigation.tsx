@@ -11,24 +11,25 @@ import Header from "../Header/Header";
 type RootStackParamList = {
   home: undefined;
   favorites: undefined;
-  details: undefined;
+  details: { id: string };
   profile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigation() {
+
   return (
     <NavigationContainer>
       <Header />
-      <Stack.Navigator
-        initialRouteName="home"
-        screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="home" component={HomeScreen} />
-        <Stack.Screen name="favorites" component={Favorites} />
-        {/* <Stack.Screen name="details" component={TourDetails} /> */}
-        <Stack.Screen name="profile" component={Profile} />
-      </Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="home"
+          screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="home" component={HomeScreen} />
+          <Stack.Screen name="favorites" component={Favorites} />
+          <Stack.Screen name="details" component={TourDetails} />
+          <Stack.Screen name="profile" component={Profile} />
+        </Stack.Navigator>
       <NavMenu />
     </NavigationContainer>
   );
