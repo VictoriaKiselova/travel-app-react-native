@@ -33,7 +33,7 @@ export default function HomeScreen() {
 
   return (
     <GradientLayout>
-      <View className="p-3 pb-0 bg-gradient-to-br from-gradient-100 via-gradient-200 to-gradient-300">
+      <View className="p-3 pb-0">
         <ToursTabs />
         <FlatList
           data={tours}
