@@ -10,6 +10,10 @@ interface IToursContext {
   setTourDetails: (value: Tour | null) => void;
   isloading: boolean;
   setIsLoading: (value: boolean) => void;
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
+  isFavorites: Tour[] | null;
+  setIsFavorites: React.Dispatch<React.SetStateAction<Tour[] | null>>;
 }
 
 const ToursContext = createContext<IToursContext | null>(null);
@@ -27,6 +31,9 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
   const [category, setCategory] = useState<string>("all");
   const [tourDetails, setTourDetails] = useState<Tour | null>(null);
   const [isloading, setIsLoading] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isFavorites, setIsFavorites] = useState<Tour[] | null>(null);
+
   return (
     <ToursContext.Provider
       value={{
@@ -38,6 +45,10 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
         setTourDetails,
         isloading,
         setIsLoading,
+        searchQuery,
+        setSearchQuery,
+        isFavorites,
+        setIsFavorites,
       }}>
       {children}
     </ToursContext.Provider>

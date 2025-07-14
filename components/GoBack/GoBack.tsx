@@ -16,7 +16,7 @@ export default function GoBack() {
       <MaterialCommunityIcons name="arrow-left" size={18} color="#636569" />
       <Text
         className={`font-[400] text-[12px] ${
-          pressed ? "text-black" : "text-black-300"
+          pressed ? "text-blue-900" : "text-black-400"
         }`}>
         Назад
       </Text>

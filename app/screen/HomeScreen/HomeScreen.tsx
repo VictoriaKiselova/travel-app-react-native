@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import ToursTabs from "@/components/ToursTabs/ToursTabs";
 
 export default function HomeScreen() {
-  const { category, tours, setTours } = useToursContext();
+  const { category, tours, setTours, searchQuery, setCategory } =
+    useToursContext();
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -18,7 +19,10 @@ export default function HomeScreen() {
           url += `${category}`;
         }
       }
-
+      if (searchQuery) {
+        url += `country/${searchQuery}`;
+        setCategory("");
+      }
       try {
         const res = await fetch(url);
         const resData = await res.json();
@@ -29,7 +33,7 @@ export default function HomeScreen() {
     };
 
     fetchTours();
-  }, [category]);
+  }, [category, searchQuery]);
 
   return (
     <GradientLayout>
