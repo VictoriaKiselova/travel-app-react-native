@@ -8,6 +8,8 @@ import {
 import { Tour } from "../../types/tours";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import FavoritesAddButton from "../FavoritesAddButton/FavoritesAddButton";
+
 interface TourCardProps {
   tour: Tour;
 }
@@ -24,7 +26,7 @@ export default function ToursCard({ tour }: TourCardProps) {
   const quntityGuest = 2;
   const totalPrice = (price * duration + extraPrice) * quntityGuest;
   const date = startDate.slice(0, 9);
-  
+
   return (
     <Pressable onPress={() => navigation.navigate("details", { id: tour._id })}>
       <View
@@ -54,18 +56,25 @@ export default function ToursCard({ tour }: TourCardProps) {
             </View>
           </View>
 
-          <View className="flex flex-row flex-wrap items-center gap-2 p-2 absolute bottom-0 right-0">
-            <View className="flex flex-row items-center gap-1 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
-              <MaterialCommunityIcons name="account" size={20} color="white" />
-              <Text className="text-white font-[400] text-[12px] text-center">
-                {quntityGuest}
-              </Text>
-            </View>
-            <View className="flex flex-row items-center gap-1 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
-              <MaterialCommunityIcons name="bed" size={20} color="white" />
-              <Text className="text-white font-[400] text-[12px] text-center">
-                {duration}
-              </Text>
+          <View className="w-full flex flex-row items-center justify-between gap-2 p-2 absolute bottom-0 right-0">
+            <FavoritesAddButton tour={tour} /> tour
+            <View className="flex flex-row items-center gap-2">
+              <View className="flex flex-row items-center gap-2 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
+                <MaterialCommunityIcons
+                  name="account"
+                  size={20}
+                  color="white"
+                />
+                <Text className="text-white font-[400] text-[12px] text-center">
+                  {quntityGuest}
+                </Text>
+              </View>
+              <View className="flex flex-row items-center gap-1 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
+                <MaterialCommunityIcons name="bed" size={20} color="white" />
+                <Text className="text-white font-[400] text-[12px] text-center">
+                  {duration}
+                </Text>
+              </View>
             </View>
           </View>
         </ImageBackground>

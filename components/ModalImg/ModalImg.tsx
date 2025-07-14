@@ -25,7 +25,6 @@ export default function ModalImg({
   setSelectedImage,
   listImagesHotel,
 }: ModalImgProps) {
-
   const scrollRef = useRef<ScrollView>(null);
   const screenWidth = Dimensions.get("window").width;
   const handleModalClose = () => {
