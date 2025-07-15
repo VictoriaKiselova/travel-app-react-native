@@ -2,8 +2,8 @@ import { Tour } from "@/types/tours";
 import { createContext, useContext, useState } from "react";
 
 interface IToursContext {
-  tours: Tour[] | null;
-  setTours: React.Dispatch<React.SetStateAction<Tour[] | null>>;
+  tours: Tour[];
+  setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
   category: string;
   setCategory: (value: string) => void;
   tourDetails: Tour | null;
@@ -12,8 +12,8 @@ interface IToursContext {
   setIsLoading: (value: boolean) => void;
   searchQuery: string;
   setSearchQuery: (value: string) => void;
-  isFavorites: Tour[] | null;
-  setIsFavorites: React.Dispatch<React.SetStateAction<Tour[] | null>>;
+  isFavorites: Tour[];
+  setIsFavorites: React.Dispatch<React.SetStateAction<Tour[]>>;
 }
 
 const ToursContext = createContext<IToursContext | null>(null);
@@ -27,12 +27,12 @@ export function useToursContext() {
 }
 
 const ToursProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tours, setTours] = useState<Tour[] | null>([]);
+  const [tours, setTours] = useState<Tour[]>([]);
   const [category, setCategory] = useState<string>("all");
   const [tourDetails, setTourDetails] = useState<Tour | null>(null);
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [isFavorites, setIsFavorites] = useState<Tour[] | null>(null);
+  const [isFavorites, setIsFavorites] = useState<Tour[]>([]);
 
   return (
     <ToursContext.Provider

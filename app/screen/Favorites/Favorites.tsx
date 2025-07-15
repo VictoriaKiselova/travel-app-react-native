@@ -17,10 +17,10 @@ export default function Favorites() {
           </View>
         ) : (
           <View className="p-3 pb-0 flex-col justify-center items-center gap-1">
-            <Text className="text-black-500 font-[500] text-[12px] text-center flex-shrink tracking-wide leading-tight">
+            <Text className="text-black-500 font-[400] text-[14px] text-center flex-shrink tracking-wide leading-tight">
               Упс! Ви ще не маєте улюблених турів.
             </Text>
-            <Text className="text-black-500 font-[500] text-[12px] text-center flex-shrink tracking-wide leading-tight">
+            <Text className="text-black-500 font-[400] text-[14px] text-center flex-shrink tracking-wide leading-tight">
               Додайте ті, що сподобалися.
             </Text>
             <MaterialIcons name="favorite" size={24} color="orange" />

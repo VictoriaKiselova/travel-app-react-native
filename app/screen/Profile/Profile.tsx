@@ -1,10 +1,11 @@
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
 import { Button, View, Text, TouchableOpacity } from "react-native";
+import SignUp from "../SignUp/SignUp";
 
 export default function Profile() {
   return (
     <GradientLayout>
-      <Text className="text-white text-center font-semibold">Profile</Text>
+      <SignUp />
     </GradientLayout>
   );
 }
