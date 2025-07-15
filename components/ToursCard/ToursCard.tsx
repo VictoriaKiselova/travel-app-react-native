@@ -26,7 +26,7 @@ export default function ToursCard({ tour }: TourCardProps) {
   const quntityGuest = 2;
   const totalPrice = (price * duration + extraPrice) * quntityGuest;
   const date = startDate.slice(0, 9);
-
+  
   return (
     <Pressable onPress={() => navigation.navigate("details", { id: tour._id })}>
       <View

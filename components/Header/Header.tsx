@@ -12,6 +12,11 @@ export default function Header() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { searchQuery, setSearchQuery } = useToursContext();
 
+  const handleSetCategory = (e: string) => {
+    setSearchQuery(e);
+    navigation.navigate("home");
+  };
+
   return (
     <View className="w-full px-1 pb-2 bg-blue-800 flex flex-row gap-1 justify-between">
       <TouchableOpacity onPress={() => navigation.navigate("home")}>
@@ -23,7 +28,7 @@ export default function Header() {
 
       <Searchbar
         placeholder="Введіть країну"
-        onChangeText={e => setSearchQuery(e)}
+        onChangeText={e => handleSetCategory(e)}
         value={searchQuery}
         style={{
           flex: 1,

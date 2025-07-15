@@ -4,6 +4,7 @@ import ToursCard from "@/components/ToursCard/ToursCard";
 import { useToursContext } from "@/components/Context/ToursContext";
 import { useEffect } from "react";
 import ToursTabs from "@/components/ToursTabs/ToursTabs";
+import NotFoundTour from "@/components/NotFoundTour/NotFoundTour";
 
 export default function HomeScreen() {
   const { category, tours, setTours, searchQuery, setCategory } =
@@ -27,6 +28,7 @@ export default function HomeScreen() {
         const res = await fetch(url);
         const resData = await res.json();
         setTours(resData.data);
+        // console.log(resData.data);
       } catch (error) {
         console.error("Error fetching tours:", error);
       }
@@ -34,6 +36,10 @@ export default function HomeScreen() {
 
     fetchTours();
   }, [category, searchQuery]);
+
+  if (!tours || tours.length === 0) {
+    return <NotFoundTour />;
+  }
 
   return (
     <GradientLayout>
