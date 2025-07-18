@@ -2,6 +2,7 @@
   "expo": {
     "name": "travel-app-react-native",
     "slug": "travel-app-react-native",
+    "owner": "victoria_uk",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,14 +10,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.viktoria.travelapp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+      "package": "com.viktoria.travelapp",
+      "edgeToEdge": true
     },
     "web": {
       "bundler": "metro",
@@ -33,16 +34,16 @@
         }
       ],
       "expo-font",
-      [
-        "expo-video",
-        {
-          "supportsBackgroundPlayback": true,
-          "supportsPictureInPicture": true
-        }
-      ]
+      "expo-video",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2e171523-7be8-4db3-bb8e-1001d9074bdf"
+      }
     }
   }
 }
