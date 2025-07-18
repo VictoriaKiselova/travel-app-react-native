@@ -1,6 +1,7 @@
 import "nativewind";
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 import WelcomeScreen from "./app/screen/WelcomeScreen/WelcomeScreen";
 import Navigation from "./components/Navigation/Navigation";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -20,13 +21,15 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView className="flex-1 relative bg-blue-800">
-      <ToursProvider>
-        <PaperProvider>
-          <StatusBar barStyle="light-content" />
-          <Navigation />
-        </PaperProvider>
-      </ToursProvider>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView className="flex-1 relative bg-blue-800">
+        <ToursProvider>
+          <PaperProvider>
+            <StatusBar barStyle="light-content" />
+            <Navigation />
+          </PaperProvider>
+        </ToursProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

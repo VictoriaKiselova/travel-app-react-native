@@ -49,7 +49,7 @@ export default function SignUp() {
   return (
     <View className="p-3 pb-0">
       <GoBack />
-      <Text className="text-black-500 font-[500] text-[14px] text-center flex-shrink tracking-wide leading-tight my-[24px]">
+      <Text className="text-black-500 font-[500] text-[16px] text-center flex-shrink tracking-wide leading-tight my-[24px]">
         Зареєструйтесь, щоб отримати доступ до всіх можливостей додатку
       </Text>
       <View>
@@ -147,7 +147,7 @@ export default function SignUp() {
         onPress={() => {
           handleAuth();
         }}
-        className="w-full py-2 px-4 bg-blue-400 rounded-md active:bg-blue-300 mt-[16px]">
+        className="w-full py-3 px-4 bg-blue-400 rounded-xl active:bg-blue-300 mt-[16px] mb-[24px]">
         <Text className="font-[400] text-[14px] text-center flex-shrink tracking-wide leading-tight text-white-100">
           Зареєструватись
         </Text>

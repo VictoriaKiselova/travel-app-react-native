@@ -26,7 +26,7 @@ export default function ToursCard({ tour }: TourCardProps) {
   const quntityGuest = 2;
   const totalPrice = (price * duration + extraPrice) * quntityGuest;
   const date = startDate.slice(0, 9);
-  
+
   return (
     <Pressable onPress={() => navigation.navigate("details", { id: tour._id })}>
       <View
@@ -57,7 +57,7 @@ export default function ToursCard({ tour }: TourCardProps) {
           </View>
 
           <View className="w-full flex flex-row items-center justify-between gap-2 p-2 absolute bottom-0 right-0">
-            <FavoritesAddButton tour={tour} /> tour
+            <FavoritesAddButton tour={tour} />
             <View className="flex flex-row items-center gap-2">
               <View className="flex flex-row items-center gap-2 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
                 <MaterialCommunityIcons
