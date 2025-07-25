@@ -7,30 +7,57 @@ import Favorites from "@/app/screen/Favorites/Favorites";
 import NavMenu from "../NavMenu/NavMenu";
 import Profile from "@/app/screen/Profile/Profile";
 import Header from "../Header/Header";
+import SignUp from "@/app/screen/SignUp/SignUp";
+import SignIn from "@/app/screen/SignIn/SignIn";
+import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 
 type RootStackParamList = {
   home: undefined;
   favorites: undefined;
   details: { id: string };
   profile: undefined;
+  signup: undefined;
+  signin: undefined;
+};
+
+type AuthRequiredModalProps = {
+  modalVisible: boolean;
+  setModalVisible: (visible: boolean) => void;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function Navigation() {
-
+export default function Navigation({
+  modalVisible,
+  setModalVisible,
+}: AuthRequiredModalProps) {
   return (
     <NavigationContainer>
       <Header />
-        <Stack.Navigator
-          initialRouteName="home"
-          screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="home" component={HomeScreen} />
-          <Stack.Screen name="favorites" component={Favorites} />
-          <Stack.Screen name="details" component={TourDetails} />
-          <Stack.Screen name="profile" component={Profile} />
-        </Stack.Navigator>
-      <NavMenu />
+      <Stack.Navigator
+        initialRouteName="home"
+        screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="home" component={HomeScreen} />
+        <Stack.Screen name="details" component={TourDetails} />
+        <Stack.Screen name="signup" component={SignUp} />
+        <Stack.Screen name="signin" component={SignIn} />
+        <Stack.Screen name="favorites">
+          {() => (
+            <PrivateRoute>
+              <Favorites />
+            </PrivateRoute>
+          )}
+        </Stack.Screen>
+
+        <Stack.Screen name="profile">
+          {() => (
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          )}
+        </Stack.Screen>
+      </Stack.Navigator>
+      <NavMenu modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </NavigationContainer>
   );
 }

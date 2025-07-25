@@ -87,7 +87,7 @@ export default function ModalImg({
           </ScrollView>
           <Pressable
             onPress={handleModalClose}
-            className="absolute top-28 right-5 bg-black bg-black-400 rounded-full p-2 z-10">
+            className="absolute top-28 right-5 p-2 z-10">
             <MaterialCommunityIcons name="close" size={24} color="white" />
           </Pressable>
         </View>

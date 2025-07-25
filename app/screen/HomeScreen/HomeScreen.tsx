@@ -28,7 +28,6 @@ export default function HomeScreen() {
         const res = await fetch(url);
         const resData = await res.json();
         setTours(resData.data);
-        // console.log(resData.data);
       } catch (error) {
         console.error("Error fetching tours:", error);
       }

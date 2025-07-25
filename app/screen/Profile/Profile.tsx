@@ -1,13 +1,10 @@
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
-import { Button, View, Text, TouchableOpacity } from "react-native";
-import SignUp from "../SignUp/SignUp";
-import SignIn from "../SignIn/SignIn";
+import { Text } from "react-native";
 
 export default function Profile() {
   return (
     <GradientLayout>
-      {/* <SignUp /> */}
-      <SignIn />
+      <Text>Profile</Text>
     </GradientLayout>
   );
 }
