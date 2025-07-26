@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text} from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import GoBack from "@/components/GoBack/GoBack";

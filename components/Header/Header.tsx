@@ -3,10 +3,7 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useToursContext } from "../Context/ToursContext";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-type RootStackParamList = {
-  home: undefined;
-};
+import { RootStackParamList } from "../../types/roots";
 
 export default function Header() {
   const insets = useSafeAreaInsets();

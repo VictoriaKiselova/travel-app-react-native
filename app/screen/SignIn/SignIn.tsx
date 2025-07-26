@@ -5,11 +5,9 @@ import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { TextInput } from "react-native-paper";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-type RootStackParamList = {
-  signup: undefined;
-  signin: undefined;
-};
+import { signinUser } from "../../api/authApi";
+import { useAuthContext } from "@/components/Context/AuthContext";
+import { RootStackParamList } from "../../../types/roots";
 
 export default function SignIn() {
   const [email, setEmail] = useState<string>("");
@@ -17,10 +15,11 @@ export default function SignIn() {
   const [isErrorEmail, setIsErrorEmail] = useState<string>("");
   const [isErrorPassword, setIsErrorPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser, setIsLoggedIn } = useAuthContext();
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const handleAuth = () => {
+  const handleAuth = async () => {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
@@ -37,6 +36,25 @@ export default function SignIn() {
       setIsErrorPassword("Пароль має містити щонайменше 7 символів");
     } else {
       setIsErrorPassword("");
+    }
+
+    try {
+      const response = await signinUser({
+        email: trimmedEmail,
+        password: trimmedPassword,
+      });
+
+      setUser(response.user);
+      setIsLoggedIn(true);
+      navigation.navigate("profile");
+    } catch (error: any) {
+      console.error("Помилка входу:", error);
+
+      if (error?.response?.data?.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("Сталася помилка. Спробуйте ще раз пізніше.");
+      }
     }
   };
 

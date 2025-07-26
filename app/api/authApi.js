@@ -33,3 +33,43 @@ export async function signupUser(userData) {
     throw error;
   }
 }
+
+export async function signinUser(userData) {
+  try {
+    const response = await api.post("/auth/signin", userData);
+    if (response.data?.tokens && response.data?.user) {
+      await AsyncStorage.setItem(
+        "accessToken",
+        response.data.tokens.accessToken
+      );
+      await AsyncStorage.setItem(
+        "refreshToken",
+        response.data.tokens.refreshToken
+      );
+      return response.data;
+    }
+  } catch (error) {
+    console.error("Signin error:", error);
+    throw error;
+  }
+}
+
+export async function logoutUser() {
+  try {
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
+
+    const response = await api.post("/auth/logout", {
+      refreshToken,
+    });
+
+    if (response.status === 200) {
+      await AsyncStorage.removeItem("accessToken");
+      await AsyncStorage.removeItem("refreshToken");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Logout error:", error);
+    throw error;
+  }
+}

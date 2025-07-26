@@ -3,14 +3,8 @@ import { Modal, Text, Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../types/roots";
 
-type RootStackParamList = {
-  home: undefined;
-  favorites: undefined;
-  profile: undefined;
-  signup: undefined;
-  signin: undefined;
-};
 type AuthRequiredModalProps = {
   modalVisible: boolean;
   setModalVisible: (visible: boolean) => void;
