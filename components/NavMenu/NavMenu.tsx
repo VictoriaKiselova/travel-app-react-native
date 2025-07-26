@@ -6,12 +6,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useAuthContext } from "../Context/AuthContext";
 import AuthRequiredModal from "../AuthRequiredModal/AuthRequiredModal";
-
-type RootStackParamList = {
-  home: undefined;
-  favorites: undefined;
-  profile: undefined;
-};
+import { RootStackParamList } from "../../types/roots";
 
 type AuthRequiredModalProps = {
   modalVisible: boolean;

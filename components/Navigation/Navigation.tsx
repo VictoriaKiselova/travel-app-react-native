@@ -10,15 +10,7 @@ import Header from "../Header/Header";
 import SignUp from "@/app/screen/SignUp/SignUp";
 import SignIn from "@/app/screen/SignIn/SignIn";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
-
-type RootStackParamList = {
-  home: undefined;
-  favorites: undefined;
-  details: { id: string };
-  profile: undefined;
-  signup: undefined;
-  signin: undefined;
-};
+import { RootStackParamList } from "../../types/roots";
 
 type AuthRequiredModalProps = {
   modalVisible: boolean;

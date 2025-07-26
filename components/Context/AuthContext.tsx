@@ -2,8 +2,8 @@ import { IUser } from "@/types/user";
 import { createContext, useContext, useState } from "react";
 
 interface IAuthContext {
-  user: IUser[];
-  setUser: React.Dispatch<React.SetStateAction<IUser[]>>;
+  user: IUser | null;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   isLoggedIn: boolean;
   setIsLoggedIn: (value: boolean) => void;
 }
@@ -20,7 +20,7 @@ export function useAuthContext() {
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [user, setUser] = useState<IUser[]>([]);
+  const [user, setUser] = useState<IUser | null>(null);
 
   return (
     <AuthContext.Provider

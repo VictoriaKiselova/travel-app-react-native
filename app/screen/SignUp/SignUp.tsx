@@ -14,11 +14,7 @@ import { useAuthContext } from "@/components/Context/AuthContext";
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
-type RootStackParamList = {
-  favorites: undefined;
-  profile: undefined;
-};
+import { RootStackParamList } from "../../../types/roots";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
