@@ -2,7 +2,14 @@ import GoBack from "@/components/GoBack/GoBack";
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { TextInput } from "react-native-paper";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { signinUser } from "../../api/authApi";
@@ -60,91 +67,98 @@ export default function SignIn() {
 
   return (
     <GradientLayout>
-      <View className="p-3 pb-0">
-        <GoBack />
-        <Text className="text-black-500 font-[500] text-[16px] text-center flex-shrink tracking-wide leading-tight my-[24px]">
-          Введіть свої дані для входу
-        </Text>
-        <View>
-          <TextInput
-            mode="outlined"
-            label="Eмейл"
-            placeholder="Введіть емейл"
-            right={
-              <TextInput.Affix
-                text="/100"
-                textStyle={{
-                  color: "#8c95a3",
-                  fontWeight: "normal",
-                  fontSize: 12,
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 0}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View className="p-3 pb-0">
+            <GoBack />
+            <Text className="text-black-500 font-[500] text-[16px] text-center flex-shrink tracking-wide leading-tight my-[24px]">
+              Введіть свої дані для входу
+            </Text>
+            <View>
+              <TextInput
+                mode="outlined"
+                label="Eмейл"
+                placeholder="Введіть емейл"
+                right={
+                  <TextInput.Affix
+                    text="/100"
+                    textStyle={{
+                      color: "#8c95a3",
+                      fontWeight: "normal",
+                      fontSize: 12,
+                    }}
+                  />
+                }
+                style={{
+                  backgroundColor: "#eed5f7",
+                  marginBottom: 6,
+                  borderRadius: 12,
                 }}
+                textColor="black"
+                theme={{ colors: { text: "black" } }}
+                value={email}
+                onChangeText={setEmail}
               />
-            }
-            style={{
-              backgroundColor: "#eed5f7",
-              marginBottom: 6,
-              borderRadius: 12,
-            }}
-            textColor="black"
-            theme={{ colors: { text: "black" } }}
-            value={email}
-            onChangeText={setEmail}
-          />
-          {isErrorEmail && (
-            <Text className="text-red-100 font-[400] text-[10px] text-left flex-shrink tracking-wide leading-tight mb-1">
-              {isErrorEmail}
-            </Text>
-          )}
-        </View>
+              {isErrorEmail && (
+                <Text className="text-red-100 font-[400] text-[10px] text-left flex-shrink tracking-wide leading-tight mb-1">
+                  {isErrorEmail}
+                </Text>
+              )}
+            </View>
 
-        <View>
-          <TextInput
-            mode="outlined"
-            label="Пароль"
-            placeholder="Введіть пароль"
-            secureTextEntry={!showPassword}
-            right={
-              <TextInput.Icon
-                icon={showPassword ? "eye-off" : "eye"}
-                onPress={() => setShowPassword(!showPassword)}
+            <View>
+              <TextInput
+                mode="outlined"
+                label="Пароль"
+                placeholder="Введіть пароль"
+                secureTextEntry={!showPassword}
+                right={
+                  <TextInput.Icon
+                    icon={showPassword ? "eye-off" : "eye"}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                }
+                style={{
+                  backgroundColor: "#eed5f7",
+                  marginBottom: 6,
+                  borderRadius: 12,
+                }}
+                textColor="black"
+                theme={{ colors: { text: "black" } }}
+                value={password}
+                onChangeText={setPassword}
               />
-            }
-            style={{
-              backgroundColor: "#eed5f7",
-              marginBottom: 6,
-              borderRadius: 12,
-            }}
-            textColor="black"
-            theme={{ colors: { text: "black" } }}
-            value={password}
-            onChangeText={setPassword}
-          />
 
-          {isErrorPassword && (
-            <Text className="text-red-100 font-[400] text-[10px] text-left flex-shrink tracking-wide leading-tight mb-1">
-              {isErrorPassword}
+              {isErrorPassword && (
+                <Text className="text-red-100 font-[400] text-[10px] text-left flex-shrink tracking-wide leading-tight mb-1">
+                  {isErrorPassword}
+                </Text>
+              )}
+            </View>
+
+            <Pressable
+              onPress={() => {
+                handleAuth();
+              }}
+              className="w-full py-3 px-4 bg-blue-400 rounded-xl active:bg-blue-300 mt-[16px] mb-[24px]">
+              <Text className="font-[400] text-[14px] text-center flex-shrink tracking-wide leading-tight text-white-100">
+                Увійти
+              </Text>
+            </Pressable>
+            <Text className="text-center font-[400] text-[12px] text-center flex-shrink tracking-wide leading-tight text-black-300">
+              Ще не маєте акаунта?{" "}
+              <Text
+                onPress={() => navigation.navigate("signup")}
+                className="font-[400] text-[12px] text-center flex-shrink tracking-wide leading-tight text-blue-500 underline">
+                Зареєструйтесь
+              </Text>
             </Text>
-          )}
-        </View>
-
-        <Pressable
-          onPress={() => {
-            handleAuth();
-          }}
-          className="w-full py-3 px-4 bg-blue-400 rounded-xl active:bg-blue-300 mt-[16px] mb-[24px]">
-          <Text className="font-[400] text-[14px] text-center flex-shrink tracking-wide leading-tight text-white-100">
-            Увійти
-          </Text>
-        </Pressable>
-        <Text className="text-center font-[400] text-[12px] text-center flex-shrink tracking-wide leading-tight text-black-300">
-          Ще не маєте акаунта?{" "}
-          <Text
-            onPress={() => navigation.navigate("signup")}
-            className="font-[400] text-[12px] text-center flex-shrink tracking-wide leading-tight text-blue-500 underline">
-            Зареєструйтесь
-          </Text>
-        </Text>
-      </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </GradientLayout>
   );
 }
