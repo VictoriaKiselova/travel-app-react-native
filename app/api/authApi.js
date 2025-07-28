@@ -25,7 +25,6 @@ export async function signupUser(userData) {
         "refreshToken",
         response.data.tokens.refreshToken
       );
-
       return response.data;
     }
   } catch (error) {
@@ -57,7 +56,6 @@ export async function signinUser(userData) {
 export async function logoutUser() {
   try {
     const refreshToken = await AsyncStorage.getItem("refreshToken");
-
     const response = await api.post("/auth/logout", {
       refreshToken,
     });
@@ -70,6 +68,20 @@ export async function logoutUser() {
     return response.data;
   } catch (error) {
     console.error("Logout error:", error);
+    throw error;
+  }
+}
+
+export async function supportUser(message) {
+  try {
+    const response = await api.post("/support/contact", message);
+    return response;
+  } catch (error) {
+    if (error.response) {
+      console.error("Support error data:", error.response.data);
+    } else {
+      console.error("Support error:", error.message);
+    }
     throw error;
   }
 }
