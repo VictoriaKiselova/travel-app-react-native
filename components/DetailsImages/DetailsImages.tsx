@@ -18,7 +18,7 @@ export default function DetailsImages({ listImagesHotel }: HotelImagesProps) {
   };
 
   return (
-    <View>
+    <View className="mb-3">
       {firstImage && (
         <Pressable onPress={() => handleModalOpen(firstImage)}>
           <Image

@@ -1,11 +1,13 @@
-import { View, Text } from "react-native";
-import { useRoute } from "@react-navigation/native";
-import { useEffect } from "react";
+import { useToursContext } from "@/components/Context/ToursContext";
+import DetailsImages from "@/components/DetailsImages/DetailsImages";
 import GoBack from "@/components/GoBack/GoBack";
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
-import { useToursContext } from "@/components/Context/ToursContext";
 import Loader from "@/components/Loader/Loader";
-import DetailsImages from "@/components/DetailsImages/DetailsImages";
+import TourBasicInfo from "@/components/TourBasicInfo/TourBasicInfo";
+import TourHeader from "@/components/TourHeader/TourHeader";
+import { useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
+import { View } from "react-native";
 
 export default function TourDetails() {
   const route = useRoute();
@@ -22,6 +24,7 @@ export default function TourDetails() {
           `https://travel-app-api-service.onrender.com/tours/details/${id}`
         );
         const dataTour = await res.json();
+
         setTourDetails(dataTour.data);
       } catch (e: unknown) {
         if (e instanceof Error) {
@@ -42,12 +45,9 @@ export default function TourDetails() {
     <GradientLayout>
       <View className="px-3 pt-2 pb-0">
         <GoBack />
-        {tourDetails && (
-          <Text className="text-blue-900 font-[500] text-[16px] leading-[1.4] text-center mb-3">
-            {tourDetails?.tourTitle ?? "Не зазначено"}
-          </Text>
-        )}
+        <TourHeader tourDetails={tourDetails} />
         <DetailsImages listImagesHotel={listImagesHotel} />
+        <TourBasicInfo tourDetails={tourDetails} />
       </View>
     </GradientLayout>
   );
