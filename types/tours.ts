@@ -1,28 +1,28 @@
-export interface FoodOption {
+export interface IFoodOption {
   _id: string;
   type: string;
   description: string;
   extraPrice: number;
 }
-export interface Review {
+export interface IReview {
   _id: string;
   user: string;
   rating: number;
   comment: string;
 }
 
-export interface Hotel {
+export interface IHotel {
   _id: string;
   name: string;
   stars: number;
-  foodOptions: FoodOption[];
+  foodOptions: IFoodOption[];
   images: string[];
   description: string;
   distanceToCenter: number;
   amenities: string[];
 }
 
-export interface Tour {
+export interface ITour {
   _id: string;
   tourTitle: string;
   country: string;
@@ -36,8 +36,8 @@ export interface Tour {
   childDiscount: number;
   transport: string;
   departureCity: string[];
-  hotel: Hotel;
-  reviews: Review[];
+  hotel: IHotel;
+  reviews: IReview[];
   bookingsCount: number;
   views: number;
   lastBookedAt: string;
@@ -49,4 +49,4 @@ export interface Tour {
   program: any[];
 }
 
-export type TourList = Tour[];
+export type TourList = ITour[];
