@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tour } from "@/types/tours";
+import { ITour } from "@/types/tours";
 
 interface ITourHeaderProps {
-  tourDetails: Tour | null;
+  tourDetails: ITour | null;
 }
 export default function TourHeader({ tourDetails }: ITourHeaderProps) {
   if (!tourDetails) return null;

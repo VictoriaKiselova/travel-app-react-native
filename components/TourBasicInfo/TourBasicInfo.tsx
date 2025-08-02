@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tour } from "@/types/tours";
+import { ITour } from "@/types/tours";
 
 interface ITourHeaderProps {
-  tourDetails: Tour | null;
+  tourDetails: ITour | null;
 }
 export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
   const nights = tourDetails?.duration;
@@ -33,7 +33,7 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
   const nightWord = nights ? getNightWord(nights) : "";
 
   return (
-    <View className="mb-1">
+    <View className="border-b border-b-blue-700 mb-4">
       <View className="flex-row items-end flex-wrap mb-1">
         <MaterialCommunityIcons
           name="calendar-month"
@@ -115,7 +115,7 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
         </Text>
       </View>
 
-      <View className="flex-row items-end flex-wrap mb-1">
+      <View className="flex-row items-end flex-wrap mb-4">
         <MaterialCommunityIcons
           name="map-marker-path"
           size={20}
