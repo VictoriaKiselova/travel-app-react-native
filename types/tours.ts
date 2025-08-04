@@ -11,16 +11,24 @@ export interface IReview {
   comment: string;
 }
 
-export interface IHotel {
+export type TransferMethod = {
+  [transportType: string]: {
+    departureCity: string[];
+    transportPrice: number;
+  };
+};
+
+export type IHotel = {
   _id: string;
   name: string;
   stars: number;
+  priceDay: number;
+  hotelDescription: string;
+  amenities: string[];
+  distanceToCenter: number;
   foodOptions: IFoodOption[];
   images: string[];
-  description: string;
-  distanceToCenter: number;
-  amenities: string[];
-}
+};
 
 export interface ITour {
   _id: string;
@@ -32,21 +40,17 @@ export interface ITour {
   offsetDays: number;
   startDate: string;
   endDate: string;
-  price: number;
   childDiscount: number;
-  transport: string;
-  departureCity: string[];
-  hotel: IHotel;
-  reviews: IReview[];
   bookingsCount: number;
-  views: number;
   lastBookedAt: string;
-  slug: string;
-  tourCode: string;
+  views: number;
   seoTitle: string;
   seoDescription: string;
-  tourImages: string[];
-  program: any[];
+  slug: string;
+  tourCode: string;
+  transferType: TransferMethod[];
+  hotel: IHotel;
+  reviews: IReview[];
 }
 
 export type TourList = ITour[];

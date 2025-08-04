@@ -9,8 +9,9 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
   const nights = tourDetails?.duration;
   const foodOptions = tourDetails?.hotel.foodOptions[3];
   const totalPrice =
-    (Number(tourDetails?.price) + Number(foodOptions?.extraPrice)) *
-    Number(tourDetails?.duration) *
+    ((Number(tourDetails?.hotel.priceDay) + Number(foodOptions?.extraPrice)) *
+      Number(tourDetails?.duration) +
+      Number(tourDetails?.transferType[0].Авіа.transportPrice)) *
     2;
 
   if (!tourDetails) return null;
@@ -108,7 +109,7 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
           className="mr-1"
         />
         <Text className="text-blue-900 font-[500] text-[14px] leading-[1] text-left">
-          Вартість:{" "}
+          Ціна за 2 дорослих (авіа):{" "}
           <Text className="text-blue-500 font-[500] text-[14px] leading-[1] text-left">
             {totalPrice} грн.
           </Text>
@@ -125,7 +126,10 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
         <Text className="text-blue-900 font-[500] text-[14px] leading-[1] text-left">
           Тип доїзду:{" "}
           <Text className="text-blue-900 font-[400] text-[14px] leading-[1] text-left">
-            {tourDetails?.transport}
+            {tourDetails?.transferType &&
+              Object.keys(tourDetails.transferType[0])
+                .filter(key => key !== "departureCity" && key !== "_id")
+                .map(type => <Text key={type}>{type} </Text>)}
           </Text>
         </Text>
       </View>
