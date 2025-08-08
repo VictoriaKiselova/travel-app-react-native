@@ -1,7 +1,9 @@
 import { useToursContext } from "@/components/Context/ToursContext";
 import DetailsImages from "@/components/DetailsImages/DetailsImages";
+import FeaturesList from "@/components/FeaturesList/FeaturesList";
 import GoBack from "@/components/GoBack/GoBack";
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
+import HotelDescription from "@/components/HotelDescription/HotelDescription";
 import HotelReviews from "@/components/HotelReviews/HotelReviews";
 import Loader from "@/components/Loader/Loader";
 import TourBasicInfo from "@/components/TourBasicInfo/TourBasicInfo";
@@ -49,6 +51,8 @@ export default function TourDetails() {
         <TourHeader tourDetails={tourDetails} />
         <DetailsImages listImagesHotel={listImagesHotel} />
         <TourBasicInfo tourDetails={tourDetails} />
+        <FeaturesList tourDetails={tourDetails} />
+        <HotelDescription tourDetails={tourDetails} />
         <HotelReviews tourDetails={tourDetails} />
       </ScrollView>
     </GradientLayout>

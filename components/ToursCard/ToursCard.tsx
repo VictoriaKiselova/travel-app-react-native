@@ -5,26 +5,27 @@ import {
   Text,
   Pressable,
 } from "react-native";
-import { Tour } from "../../types/tours";
+import { ITour } from "../../types/tours";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import FavoritesAddButton from "../FavoritesAddButton/FavoritesAddButton";
 
 interface TourCardProps {
-  tour: Tour;
+  tour: ITour;
 }
 
 export default function ToursCard({ tour }: TourCardProps) {
   const navigation = useNavigation<any>();
-  const { duration, city, country, tourTitle, startDate, hotel, price } = tour;
+  const { duration, city, country, tourTitle, startDate, hotel } = tour;
   const screenWidth = Dimensions.get("window").width;
   const cardWidth = screenWidth * 0.9;
-  const allInclusiveOption = tour.hotel.foodOptions.find(
-    option => option.description === "Все включено"
-  );
-  const extraPrice = allInclusiveOption?.extraPrice || 0;
   const quntityGuest = 2;
-  const totalPrice = (price * duration + extraPrice) * quntityGuest;
+  const foodOptions = tour?.hotel.foodOptions[3];
+  const totalPrice =
+    ((Number(tour?.hotel.priceDay) + Number(foodOptions?.extraPrice)) *
+      Number(tour?.duration) +
+      Number(tour?.transferType[0].Авіа.transportPrice)) *
+    quntityGuest;
   const date = startDate.slice(0, 9);
 
   return (

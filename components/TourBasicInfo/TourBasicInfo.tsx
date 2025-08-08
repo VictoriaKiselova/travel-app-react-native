@@ -35,6 +35,9 @@ export default function TourBasicInfo({ tourDetails }: ITourHeaderProps) {
 
   return (
     <View className="border-b border-b-blue-700 mb-4">
+      <Text className="text-blue-900 font-[400] text-[13px] leading-[1] text-left mb-2">
+        {tourDetails?.tourDescription}
+      </Text>
       <View className="flex-row items-end flex-wrap mb-1">
         <MaterialCommunityIcons
           name="calendar-month"
