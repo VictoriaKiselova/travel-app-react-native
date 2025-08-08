@@ -10,11 +10,8 @@ export default function TourHeader({ tourDetails }: ITourHeaderProps) {
 
   return (
     <View className="mb-1">
-      <Text className="text-blue-900 font-[500] text-[18px] leading-[1] text-center mb-1">
+      <Text className="text-blue-900 font-[500] text-[18px] leading-[1] text-center mb-2">
         {tourDetails?.tourTitle ?? ""}
-      </Text>
-      <Text className="text-blue-900 font-[400] text-[13px] leading-[1] text-center mb-2">
-        {tourDetails?.tourDescription}
       </Text>
       <View className="flex-row items-end gap-[2px] flex-wrap mb-1">
         <View className="flex-row items-end flex-wrap mr-[2px]">
@@ -23,11 +20,14 @@ export default function TourHeader({ tourDetails }: ITourHeaderProps) {
             {tourDetails?.hotel.stars ?? ""}
           </Text>
         </View>
-        <Text className="text-blue-900 font-[500] text-[14px] leading-[1] text-left">
+        <Text className="text-blue-300 font-[500] text-[14px] leading-[1] text-left">
           {tourDetails?.hotel.name ?? ""},
         </Text>
-        <Text className="text-blue-900 font-[500] text-[14px] leading-[1] text-left">
-          {tourDetails?.city ?? ""}, {tourDetails?.country ?? ""}
+        <Text className="text-blue-300 font-[500] text-[14px] leading-[1] text-left">
+          {tourDetails?.city ?? ""},{" "}
+        </Text>
+        <Text className="text-blue-300 font-[500] text-[14px] leading-[1] text-left">
+          {tourDetails?.country ?? ""}
         </Text>
       </View>
     </View>
