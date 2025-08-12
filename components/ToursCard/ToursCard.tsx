@@ -9,12 +9,22 @@ import { ITour } from "../../types/tours";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import FavoritesAddButton from "../FavoritesAddButton/FavoritesAddButton";
+import { useToursContext } from "../Context/ToursContext";
 
 interface TourCardProps {
   tour: ITour;
 }
 
 export default function ToursCard({ tour }: TourCardProps) {
+  const {
+    allTours,
+    setAllTours,
+    setTours,
+    filters,
+    setFilters,
+    setIsFilterApplied,
+    isFilterApplied,
+  } = useToursContext();
   const navigation = useNavigation<any>();
   const { duration, city, country, tourTitle, startDate, hotel } = tour;
   const screenWidth = Dimensions.get("window").width;
@@ -73,7 +83,7 @@ export default function ToursCard({ tour }: TourCardProps) {
               <View className="flex flex-row items-center gap-1 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
                 <MaterialCommunityIcons name="bed" size={20} color="white" />
                 <Text className="text-white font-[400] text-[12px] text-center">
-                  {duration}
+                  {isFilterApplied ? filters.nights : duration}
                 </Text>
               </View>
             </View>

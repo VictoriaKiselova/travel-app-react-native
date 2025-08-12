@@ -49,6 +49,7 @@ module.exports = {
         },
         pink: {
           100: "#af8bb5",
+          200: "#9a64a3",
         },
       },
     },
