@@ -1,19 +1,25 @@
-import { Tour } from "@/types/tours";
+import { ITour } from "@/types/tours";
 import { createContext, useContext, useState } from "react";
-
+import { Filters } from "@/types/filters";
 interface IToursContext {
-  tours: Tour[];
-  setTours: React.Dispatch<React.SetStateAction<Tour[]>>;
+  allTours: ITour[];
+  setAllTours: React.Dispatch<React.SetStateAction<ITour[]>>;
+  tours: ITour[];
+  setTours: React.Dispatch<React.SetStateAction<ITour[]>>;
   category: string;
   setCategory: (value: string) => void;
-  tourDetails: Tour | null;
-  setTourDetails: (value: Tour | null) => void;
+  tourDetails: ITour | null;
+  setTourDetails: (value: ITour | null) => void;
   isloading: boolean;
   setIsLoading: (value: boolean) => void;
   searchQuery: string;
   setSearchQuery: (value: string) => void;
-  isFavorites: Tour[];
-  setIsFavorites: React.Dispatch<React.SetStateAction<Tour[]>>;
+  isFavorites: ITour[];
+  setIsFavorites: React.Dispatch<React.SetStateAction<ITour[]>>;
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  isFilterApplied: boolean;
+  setIsFilterApplied: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ToursContext = createContext<IToursContext | null>(null);
@@ -27,16 +33,28 @@ export function useToursContext() {
 }
 
 const ToursProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tours, setTours] = useState<Tour[]>([]);
+  const [allTours, setAllTours] = useState<ITour[]>([]);
+  const [tours, setTours] = useState<ITour[]>([]);
   const [category, setCategory] = useState<string>("all");
-  const [tourDetails, setTourDetails] = useState<Tour | null>(null);
+  const [tourDetails, setTourDetails] = useState<ITour | null>(null);
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [isFavorites, setIsFavorites] = useState<Tour[]>([]);
+  const [isFavorites, setIsFavorites] = useState<ITour[]>([]);
+  const [filters, setFilters] = useState<Filters>({
+    country: null,
+    nutrition: null,
+    peopleCount: null,
+    childrenCount: null,
+    nights: 1,
+    transport: null,
+  });
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
 
   return (
     <ToursContext.Provider
       value={{
+        allTours,
+        setAllTours,
         tours,
         setTours,
         category,
@@ -49,6 +67,10 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
         setSearchQuery,
         isFavorites,
         setIsFavorites,
+        filters,
+        setFilters,
+        isFilterApplied,
+        setIsFilterApplied,
       }}>
       {children}
     </ToursContext.Provider>

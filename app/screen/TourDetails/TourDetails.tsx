@@ -10,7 +10,7 @@ import TourBasicInfo from "@/components/TourBasicInfo/TourBasicInfo";
 import TourHeader from "@/components/TourHeader/TourHeader";
 import { useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
 
 export default function TourDetails() {
   const route = useRoute();
@@ -27,7 +27,7 @@ export default function TourDetails() {
           `https://travel-app-api-service.onrender.com/tours/details/${id}`
         );
         const dataTour = await res.json();
-        // console.log(dataTour);
+
         setTourDetails(dataTour.data);
       } catch (e: unknown) {
         if (e instanceof Error) {
@@ -46,7 +46,7 @@ export default function TourDetails() {
     <Loader />
   ) : (
     <GradientLayout>
-      <ScrollView className="px-3 pt-2 pb-0">
+      <ScrollView className="px-3 pt-2 pb-0 mb-[-40px]">
         <GoBack />
         <TourHeader tourDetails={tourDetails} />
         <DetailsImages listImagesHotel={listImagesHotel} />

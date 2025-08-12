@@ -5,10 +5,18 @@ import { useToursContext } from "@/components/Context/ToursContext";
 import { useEffect } from "react";
 import ToursTabs from "@/components/ToursTabs/ToursTabs";
 import NotFoundTour from "@/components/NotFoundTour/NotFoundTour";
+import SearchByFilters from "@/components/SearchByFilters/SearchByFilters";
 
 export default function HomeScreen() {
-  const { category, tours, setTours, searchQuery, setCategory } =
-    useToursContext();
+  const {
+    category,
+    tours,
+    setTours,
+    searchQuery,
+    setCategory,
+    allTours,
+    setAllTours,
+  } = useToursContext();
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -28,6 +36,7 @@ export default function HomeScreen() {
         const res = await fetch(url);
         const resData = await res.json();
         setTours(resData.data);
+        setAllTours(resData.data);
       } catch (error) {
         console.error("Error fetching tours:", error);
       }
@@ -44,6 +53,7 @@ export default function HomeScreen() {
     <GradientLayout>
       <View className="p-3 pb-0">
         <ToursTabs />
+        <SearchByFilters tours={tours} />
         <FlatList
           data={tours}
           renderItem={({ item }) => <ToursCard tour={item} />}
