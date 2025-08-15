@@ -25,17 +25,35 @@ export default function ToursCard({ tour }: TourCardProps) {
     setIsFilterApplied,
     isFilterApplied,
   } = useToursContext();
+
   const navigation = useNavigation<any>();
   const { duration, city, country, tourTitle, startDate, hotel } = tour;
   const screenWidth = Dimensions.get("window").width;
   const cardWidth = screenWidth * 0.9;
-  const quntityGuest = 2;
-  const foodOptions = tour?.hotel.foodOptions[3];
-  const totalPrice =
-    ((Number(tour?.hotel.priceDay) + Number(foodOptions?.extraPrice)) *
-      Number(tour?.duration) +
+  const foodOptionFiltered = tour.hotel.foodOptions.find(
+    option => option.description === filters.nutrition
+  );
+
+  const foodPrice = foodOptionFiltered
+    ? foodOptionFiltered.extraPrice
+    : (tour.hotel.foodOptions[3]?.extraPrice ?? 0);
+
+  const guestsCount = filters.peopleCount ?? 2;
+  const childrenCount = filters.childrenCount ?? 0;
+  const nightsCount = filters.nights ?? duration;
+
+  const adultPrice =
+    ((Number(tour?.hotel.priceDay) + foodPrice) * Number(nightsCount) +
       Number(tour?.transferType[0].Авіа.transportPrice)) *
-    quntityGuest;
+    guestsCount;
+
+  const childrenPrice =
+    ((Number(tour?.hotel.priceDay) + foodPrice) * Number(nightsCount) +
+      Number(tour?.transferType[0].Авіа.transportPrice)) *
+    Number(tour?.childDiscount) *
+    childrenCount;
+
+  const totalPrice = Math.round(adultPrice + childrenPrice);
   const date = startDate.slice(0, 9);
 
   return (
@@ -51,13 +69,11 @@ export default function ToursCard({ tour }: TourCardProps) {
             height: 200,
             position: "relative",
           }}
-          imageStyle={{
-            borderRadius: 16,
-          }}>
+          imageStyle={{ borderRadius: 16 }}>
           <View className="flex flex-row flex-wrap items-center gap-2 p-2">
             <View className="py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
-              <Text className="text-white font-[400] text-[12px] leading-[1.5] text-center">
-                {country}, {city}
+              <Text className="text-white font-[400] text-[12px] text-center">
+                {country ?? ""}, {city ?? ""}
               </Text>
             </View>
             <View className="py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
@@ -69,6 +85,7 @@ export default function ToursCard({ tour }: TourCardProps) {
 
           <View className="w-full flex flex-row items-center justify-between gap-2 p-2 absolute bottom-0 right-0">
             <FavoritesAddButton tour={tour} />
+
             <View className="flex flex-row items-center gap-2">
               <View className="flex flex-row items-center gap-2 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
                 <MaterialCommunityIcons
@@ -77,13 +94,27 @@ export default function ToursCard({ tour }: TourCardProps) {
                   color="white"
                 />
                 <Text className="text-white font-[400] text-[12px] text-center">
-                  {quntityGuest}
+                  {guestsCount}
                 </Text>
               </View>
+
+              {childrenCount > 0 && (
+                <View className="flex flex-row items-center gap-2 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
+                  <MaterialCommunityIcons
+                    name="baby-face"
+                    size={20}
+                    color="white"
+                  />
+                  <Text className="text-white font-[400] text-[12px] text-center">
+                    {childrenCount}
+                  </Text>
+                </View>
+              )}
+
               <View className="flex flex-row items-center gap-1 py-1 px-4 bg-blue-700 rounded-[16px] shadow-sm shadow-black-300">
                 <MaterialCommunityIcons name="bed" size={20} color="white" />
                 <Text className="text-white font-[400] text-[12px] text-center">
-                  {isFilterApplied ? filters.nights : duration}
+                  {nightsCount}
                 </Text>
               </View>
             </View>
@@ -95,11 +126,11 @@ export default function ToursCard({ tour }: TourCardProps) {
             <View className="flex flex-row gap-[2px] items-center">
               <MaterialCommunityIcons name="star" size={24} color="#588fe8" />
               <Text className="text-blue-700 font-[500] text-[14px]">
-                {hotel.stars}
+                {hotel.stars ?? 0}
               </Text>
             </View>
             <Text className="text-blue-800 font-[600] text-[14px]">
-              {tourTitle}
+              {tourTitle ?? ""}
             </Text>
           </View>
 

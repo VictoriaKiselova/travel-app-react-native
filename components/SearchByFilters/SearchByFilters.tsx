@@ -32,9 +32,15 @@ export default function SearchByFilters({ tours }: Props) {
   ]);
 
   function handleFilterTour() {
-    const filteredTours = allTours.filter(
-      item => item.country === filters.country
-    );
+    const filteredTours = allTours.filter(tour => {
+      if (filters.country && tour.country !== filters.country) return false;
+      if (filters.transport) {
+        const transfer = tour.transferType[0];
+        if (!transfer[filters.transport]) return false;
+      }
+      if (filters.nights && tour.duration < filters.nights) return false;
+      return true;
+    });
 
     setTours(filteredTours);
     setIsFilterApplied(true);
