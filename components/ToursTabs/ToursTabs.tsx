@@ -2,11 +2,20 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useToursContext } from "../Context/ToursContext";
 
 export default function ToursTabs() {
-  const { category, setCategory, setSearchQuery } = useToursContext();
+  const { category, setCategory, setSearchQuery, setFilters } =
+    useToursContext();
 
   const handleSetCategory = (value: string) => {
     setCategory(value);
     setSearchQuery("");
+    setFilters({
+      country: null,
+      nutrition: null,
+      peopleCount: null,
+      childrenCount: null,
+      nights: null,
+      transport: null,
+    });
   };
 
   return (

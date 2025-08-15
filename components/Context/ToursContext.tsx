@@ -45,7 +45,7 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
     nutrition: null,
     peopleCount: null,
     childrenCount: null,
-    nights: 1,
+    nights: null,
     transport: null,
   });
   const [isFilterApplied, setIsFilterApplied] = useState(false);
