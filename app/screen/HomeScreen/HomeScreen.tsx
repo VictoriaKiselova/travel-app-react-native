@@ -1,11 +1,11 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Text } from "react-native";
 import GradientLayout from "@/components/GradientLayout/GradientLayout";
 import ToursCard from "@/components/ToursCard/ToursCard";
 import { useToursContext } from "@/components/Context/ToursContext";
 import { useEffect } from "react";
 import ToursTabs from "@/components/ToursTabs/ToursTabs";
-import NotFoundTour from "@/components/NotFoundTour/NotFoundTour";
 import SearchByFilters from "@/components/SearchByFilters/SearchByFilters";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 export default function HomeScreen() {
   const {
@@ -14,12 +14,14 @@ export default function HomeScreen() {
     setTours,
     searchQuery,
     setCategory,
-    allTours,
     setAllTours,
+    isloading,
+    setIsLoading,
   } = useToursContext();
 
   useEffect(() => {
     const fetchTours = async () => {
+      setIsLoading(true);
       let url = "https://travel-app-api-service.onrender.com/tours/";
       if (category && category !== "all") {
         if (category === "popular") {
@@ -39,29 +41,40 @@ export default function HomeScreen() {
         setAllTours(resData.data);
       } catch (error) {
         console.error("Error fetching tours:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchTours();
   }, [category, searchQuery]);
 
-  if (!tours || tours.length === 0) {
-    return <NotFoundTour />;
-  }
-
   return (
     <GradientLayout>
       <View className="p-3 pb-0">
         <ToursTabs />
         <SearchByFilters tours={tours} />
-        <FlatList
-          data={tours}
-          renderItem={({ item }) => <ToursCard tour={item} />}
-          keyExtractor={item => item._id}
-          contentContainerStyle={{ alignItems: "center" }}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-        />
+
+        {isloading ? (
+          <ActivityIndicator
+            animating={true}
+            color={MD2Colors.blue800}
+            className="p-3"
+          />
+        ) : tours.length > 0 ? (
+          <FlatList
+            data={tours}
+            renderItem={({ item }) => <ToursCard tour={item} />}
+            keyExtractor={item => item._id}
+            contentContainerStyle={{ alignItems: "center" }}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
+          />
+        ) : (
+          <Text className="text-center text-gray-500 text-[16px]">
+            Нічого не знайдено
+          </Text>
+        )}
       </View>
     </GradientLayout>
   );

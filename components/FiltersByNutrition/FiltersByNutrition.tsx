@@ -25,7 +25,7 @@ export default function FiltersByNutrition({
       <Text className="text-blue-900 font-[400] text-[14px] leading-[1] text-left mb-2">
         Харчування:
       </Text>
-      <View className="flex-row items-center flex-wrap gap-1">
+      <View className="flex-row items-center flex-wrap gap-[6px] ">
         {allNutrition.map((item, i) => (
           <TouchableOpacity
             key={i}

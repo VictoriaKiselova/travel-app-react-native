@@ -20,6 +20,8 @@ interface IToursContext {
   setFilters: React.Dispatch<React.SetStateAction<Filters>>;
   isFilterApplied: boolean;
   setIsFilterApplied: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpenFilters: boolean;
+  setIsOpenFilters: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ToursContext = createContext<IToursContext | null>(null);
@@ -49,6 +51,7 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
     transport: null,
   });
   const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [isOpenFilters, setIsOpenFilters] = useState<boolean>(false);
 
   return (
     <ToursContext.Provider
@@ -71,6 +74,8 @@ const ToursProvider = ({ children }: { children: React.ReactNode }) => {
         setFilters,
         isFilterApplied,
         setIsFilterApplied,
+        isOpenFilters,
+        setIsOpenFilters,
       }}>
       {children}
     </ToursContext.Provider>
