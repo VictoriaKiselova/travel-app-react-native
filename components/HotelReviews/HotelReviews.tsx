@@ -13,7 +13,7 @@ export default function HotelReviews({ tourDetails }: ITourHeaderProps) {
   }
 
   return (
-    <View className="flex-1 flex-col gap-3">
+    <View className="flex-1 flex-col gap-3 mb-4">
       <Text className="text-blue-900 font-[600] text-[14px] leading-[1] text-left">
         Відгуки:
       </Text>

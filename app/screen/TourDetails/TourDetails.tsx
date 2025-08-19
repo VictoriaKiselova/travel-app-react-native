@@ -46,7 +46,7 @@ export default function TourDetails() {
     <Loader />
   ) : (
     <GradientLayout>
-      <ScrollView className="px-3 pt-2 pb-0 mb-[-40px]">
+      <ScrollView className="px-3 pt-2" style={{ marginBottom: -90 }}>
         <GoBack />
         <TourHeader tourDetails={tourDetails} />
         <DetailsImages listImagesHotel={listImagesHotel} />

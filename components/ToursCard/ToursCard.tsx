@@ -10,6 +10,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import FavoritesAddButton from "../FavoritesAddButton/FavoritesAddButton";
 import { useToursContext } from "../Context/ToursContext";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 interface TourCardProps {
   tour: ITour;
@@ -24,6 +25,7 @@ export default function ToursCard({ tour }: TourCardProps) {
     setFilters,
     setIsFilterApplied,
     isFilterApplied,
+    isloading,
   } = useToursContext();
 
   const navigation = useNavigation<any>();
@@ -55,6 +57,16 @@ export default function ToursCard({ tour }: TourCardProps) {
 
   const totalPrice = Math.round(adultPrice + childrenPrice);
   const date = startDate.slice(0, 9);
+
+  if (isloading) {
+    return (
+      <ActivityIndicator
+        animating={true}
+        color={MD2Colors.blue800}
+        className="p-3"
+      />
+    );
+  }
 
   return (
     <Pressable onPress={() => navigation.navigate("details", { id: tour._id })}>
