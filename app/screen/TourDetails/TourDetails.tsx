@@ -8,12 +8,17 @@ import HotelReviews from "@/components/HotelReviews/HotelReviews";
 import Loader from "@/components/Loader/Loader";
 import TourBasicInfo from "@/components/TourBasicInfo/TourBasicInfo";
 import TourHeader from "@/components/TourHeader/TourHeader";
-import { useRoute } from "@react-navigation/native";
+import { RootStackParamList } from "@/types/roots";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useEffect } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity, Text } from "react-native";
 
 export default function TourDetails() {
   const route = useRoute();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const { id } = route.params as { id: string };
   const { tourDetails, setTourDetails, isloading, setIsLoading } =
     useToursContext();
@@ -53,6 +58,13 @@ export default function TourDetails() {
         <TourBasicInfo tourDetails={tourDetails} />
         <FeaturesList tourDetails={tourDetails} />
         <HotelDescription tourDetails={tourDetails} />
+        <TouchableOpacity
+          className="bg-blue-700 text-center rounded-3xl py-2 px-4 mb-5"
+          onPress={() => navigation.navigate("booking")}>
+          <Text className="text-white text-center font-[400] shadow-sm text-[14px]">
+            Забронювати
+          </Text>
+        </TouchableOpacity>
         <HotelReviews tourDetails={tourDetails} />
       </ScrollView>
     </GradientLayout>
