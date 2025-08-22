@@ -11,6 +11,7 @@ import SignUp from "@/app/screen/SignUp/SignUp";
 import SignIn from "@/app/screen/SignIn/SignIn";
 import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 import { RootStackParamList } from "../../types/roots";
+import Booking from "@/app/screen/Booking/Booking";
 
 type AuthRequiredModalProps = {
   modalVisible: boolean;
@@ -40,12 +41,18 @@ export default function Navigation({
             </PrivateRoute>
           )}
         </Stack.Screen>
-
         <Stack.Screen name="profile">
           {() => (
             <PrivateRoute>
               <Profile />
             </PrivateRoute>
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="booking">
+          {() => (
+            // <PrivateRoute>
+            <Booking />
+            // {/* </PrivateRoute> */}
           )}
         </Stack.Screen>
       </Stack.Navigator>

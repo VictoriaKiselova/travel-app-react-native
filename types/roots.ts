@@ -5,4 +5,5 @@ export type RootStackParamList = {
   details: undefined;
   home: undefined;
   favorites: undefined;
+  booking: undefined;
 };
