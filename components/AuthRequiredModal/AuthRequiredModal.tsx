@@ -4,22 +4,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../types/roots";
+import { useAuthContext } from "../Context/AuthContext";
 
-type AuthRequiredModalProps = {
-  modalVisible: boolean;
-  setModalVisible: (visible: boolean) => void;
-};
-
-export default function AuthRequiredModal({
-  modalVisible,
-  setModalVisible,
-}: AuthRequiredModalProps) {
+export default function AuthRequiredModal() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { modalAuthVisible, setModalAuthVisible } = useAuthContext();
 
   const handleCheckoutToAuth = () => {
     navigation.navigate("signin");
-    setModalVisible(false);
+    setModalAuthVisible(false);
   };
 
   return (
@@ -30,10 +24,10 @@ export default function AuthRequiredModal({
         alignItems: "center",
       }}>
       <Modal
-        visible={modalVisible}
+        visible={modalAuthVisible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setModalVisible(false)}>
+        onRequestClose={() => setModalAuthVisible(false)}>
         <View
           style={{
             backgroundColor: "rgba(20, 20, 20, 0.75)",
@@ -52,7 +46,7 @@ export default function AuthRequiredModal({
               </Text>
             </Pressable>
             <Pressable
-              onPress={() => setModalVisible(false)}
+              onPress={() => setModalAuthVisible(false)}
               className="absolute top-1 right-1 p-2 z-10">
               <MaterialCommunityIcons name="close" size={24} color="black" />
             </Pressable>

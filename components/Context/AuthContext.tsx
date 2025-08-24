@@ -6,6 +6,8 @@ interface IAuthContext {
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   isLoggedIn: boolean;
   setIsLoggedIn: (value: boolean) => void;
+  modalAuthVisible: boolean;
+  setModalAuthVisible: (visible: boolean) => void;
 }
 
 const AuthContext = createContext<IAuthContext | null>(null);
@@ -21,6 +23,7 @@ export function useAuthContext() {
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<IUser | null>(null);
+  const [modalAuthVisible, setModalAuthVisible] = useState(false);
 
   return (
     <AuthContext.Provider
@@ -29,6 +32,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser,
         isLoggedIn,
         setIsLoggedIn,
+        modalAuthVisible,
+        setModalAuthVisible,
       }}>
       {children}
     </AuthContext.Provider>
