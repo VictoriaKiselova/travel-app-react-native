@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useState } from "react";
 import HomeScreen from "../../app/screen/HomeScreen/HomeScreen";
 import TourDetails from "../../app/screen/TourDetails/TourDetails";
 import Favorites from "@/app/screen/Favorites/Favorites";
@@ -13,19 +13,18 @@ import PrivateRoute from "../PrivateRoutes/PrivateRoutes";
 import { RootStackParamList } from "../../types/roots";
 import Booking from "@/app/screen/Booking/Booking";
 
-type AuthRequiredModalProps = {
-  modalVisible: boolean;
-  setModalVisible: (visible: boolean) => void;
-};
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function Navigation({
-  modalVisible,
-  setModalVisible,
-}: AuthRequiredModalProps) {
+export default function Navigation() {
+  const [currentRoute, setCurrentRoute] = useState<string>("home");
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      onStateChange={state => {
+        if (!state) return;
+        const route = state.routes[state.index];
+        setCurrentRoute(route.name);
+      }}>
       <Header />
       <Stack.Navigator
         initialRouteName="home"
@@ -50,13 +49,13 @@ export default function Navigation({
         </Stack.Screen>
         <Stack.Screen name="booking">
           {() => (
-            // <PrivateRoute>
-            <Booking />
-            // {/* </PrivateRoute> */}
+            <PrivateRoute>
+              <Booking />
+            </PrivateRoute>
           )}
         </Stack.Screen>
       </Stack.Navigator>
-      <NavMenu modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      <NavMenu currentRoute={currentRoute} setCurrentRoute={setCurrentRoute} />
     </NavigationContainer>
   );
 }
