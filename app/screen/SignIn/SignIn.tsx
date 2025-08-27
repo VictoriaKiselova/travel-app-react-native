@@ -148,7 +148,7 @@ export default function SignIn() {
                 Увійти
               </Text>
             </Pressable>
-            <Text className="text-center font-[400] text-[12px] text-center flex-shrink tracking-wide leading-tight text-black-300">
+            <Text className="text-center font-[400] text-[12px] flex-shrink tracking-wide leading-tight text-black-300">
               Ще не маєте акаунта?{" "}
               <Text
                 onPress={() => navigation.navigate("signup")}
