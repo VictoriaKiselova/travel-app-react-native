@@ -50,7 +50,6 @@ export default function SignIn() {
         email: trimmedEmail,
         password: trimmedPassword,
       });
-
       setUser(response.user);
       setIsLoggedIn(true);
       navigation.navigate("profile");
